@@ -1,0 +1,138 @@
+---
+title: "Unit V: Node.js Installation and Setup"
+id: unit5-topic2-installation-setup
+tags:
+  - unit-5
+  - nodejs
+  - setup
+  - npm
+  - package-json
+alias:
+  - "Node.js Setup"
+  - "NPM"
+links:
+  - "[[UITx/Unit_05_Topic_01_Intro_to_NodeJS_and_Architecture.md|Introduction to Node.js and its Architecture]]"
+  - "[[UITx/Unit_05_Topic_03_Creating_Web_Servers_with_HTTP.md|Creating Web Servers with HTTP]]"
+---
+
+# Unit V, Topic 2: Node.js Installation and Setup
+
+> [!quote] To wield the power of Node.js, we must first welcome it into our development environment. The setup process involves installing the Node.js runtime, which includes the powerful Node Package Manager (npm), and learning to initialize a project. This foundation is essential for building any Node.js application.
+
+## 1. Download and Installation of Node.js
+
+The official and most straightforward way to install Node.js is by using the installers from its official website.
+
+-   **Official Website:** [nodejs.org](https://nodejs.org/)
+-   **Choosing a Version:** You will typically see two versions available for download:
+    -   **LTS (Long-Term Support):** This is the recommended version for most users, especially for production environments. It is stable, reliable, and will be supported with bug fixes and security patches for an extended period.
+    -   **Current:** This version includes the latest features but may not be as stable as the LTS version. It's suitable for those who want to experiment with cutting-edge features.
+    -   **Recommendation:** Always choose the **LTS** version for course work and real-world projects.
+-   **Installation Process:** Download the installer for your operating system (Windows, macOS, Linux) and run it. The installer will guide you through the process and will also automatically install **npm**.
+
+### Verifying the Installation
+After the installation is complete, open a new terminal or command prompt and type the following commands to verify that Node.js and npm are installed correctly:
+
+```bash
+# Check Node.js version
+node -v
+
+# Check npm version
+npm -v
+```
+If the installation was successful, these commands will print the version numbers of Node.js and npm, respectively.
+
+## 2. NPM (Node Package Manager)
+
+**NPM** is the default package manager for Node.js and is the largest software registry in the world. It is a command-line tool that helps you:
+-   **Install packages:** Download and add third-party libraries (packages) to your project.
+-   **Manage dependencies:** Keep track of which packages your project depends on.
+-   **Run scripts:** Define and run common project tasks (e.g., starting your server, running tests).
+
+## 3. Initializing a Node.js Project
+
+Every Node.js project should start with a `package.json` file. This file is the heart of your project; it contains metadata about the project and manages its dependencies.
+
+### The `npm init` Command
+To create a `package.json` file, navigate to your project's root directory in the terminal and run:
+
+```bash
+npm init
+```
+This command will launch an interactive wizard that prompts you for information about your project, such as:
+-   `package name`: The name of your project.
+-   `version`: The initial version (defaults to `1.0.0`).
+-   `description`: A brief description of your project.
+-   `entry point`: The main file of your application (defaults to `index.js`).
+-   `test command`: The command to run tests.
+-   `git repository`: The URL of your Git repository.
+-   `keywords`: Keywords to help others find your package.
+-   `author`: Your name.
+-   `license`: The license for your project (defaults to `ISC`).
+
+You can press Enter to accept the defaults for most of these. Once completed, it will generate a `package.json` file.
+
+To quickly accept all the defaults, you can use the `-y` flag:
+```bash
+npm init -y
+```
+
+### Example `package.json` File:
+```json
+{
+  "name": "my-node-app",
+  "version": "1.0.0",
+  "description": "A simple Node.js application.",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Your Name",
+  "license": "ISC",
+  "dependencies": {}
+}
+```
+
+## 4. Installing and Managing Dependencies
+
+Packages that your project needs to run are called **dependencies**.
+
+### `npm install <package-name>`
+This command is used to install a package.
+
+-   **Example:** Let's install `express`, a popular web framework for Node.js.
+    ```bash
+    npm install express
+    ```
+-   **What happens?**
+    1.  NPM downloads the `express` package from the npm registry.
+    2.  It creates a `node_modules` folder in your project directory and places the package files there.
+    3.  It automatically adds `express` to the `dependencies` section of your `package.json` file and creates or updates a `package-lock.json` file.
+
+### `package-lock.json`
+-   This file is automatically generated by npm.
+-   It records the exact version of every package that was installed, ensuring that your project is consistent and reproducible across different machines.
+-   You should commit this file to your version control (e.g., Git).
+
+### `node_modules`
+-   This folder contains all the code for your project's dependencies.
+-   It can become very large.
+-   **You should NEVER commit the `node_modules` folder to version control.** It can be easily regenerated by running `npm install` in a project that has a `package.json` and `package-lock.json` file.
+
+## 5. Exam-Oriented Insights
+
+A proper project setup is the first step in any Node.js application.
+
+> [!question] **Potential 2-Mark Questions:**
+> 1.  **What is the difference between the LTS and Current versions of Node.js?**
+>     *Answer:* The LTS (Long-Term Support) version is stable and recommended for production, while the Current version has the latest features but may be less stable.
+> 2.  **What is the purpose of the `package.json` file?**
+>     *Answer:* It is a manifest file that contains metadata about a Node.js project and is used to manage the project's dependencies and scripts.
+> 3.  **Which npm command is used to create the `package.json` file?**
+>     *Answer:* `npm init`.
+> 4.  **What is the `node_modules` folder, and should it be committed to version control?**
+>     *Answer:* The `node_modules` folder contains all the downloaded code for a project's dependencies. It should NOT be committed to version control because it can be regenerated by running `npm install`.
+
+> [!tip] **For Higher Mark Questions:**
+> Be prepared to describe the step-by-step process of initializing a new Node.js project and installing a dependency like `express`. Explain the roles of `package.json`, `package-lock.json`, and `node_modules` in managing project dependencies. Discuss the importance of the `scripts` section in `package.json` for automating tasks.
